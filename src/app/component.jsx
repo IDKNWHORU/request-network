@@ -90,7 +90,9 @@ export default function MyComponent() {
   };
 
   const createRequest = async (formData) => {
+    console.log("hello");
     const web3SignatureProvider = new Web3SignatureProvider(walletClient);
+    console.log("world");
     const requestClient = new RequestNetwork({
       nodeConnectionConfig: {
         baseURL: "https://sepolia.gateway.request.network/",
