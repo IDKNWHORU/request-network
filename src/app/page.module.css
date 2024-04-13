@@ -1,22 +1,40 @@
 .main {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
-  padding: 6rem;
   min-height: 100vh;
-}
+  gap: 45px;
+  padding: 45px 0;
 
-.description {
-  display: flex;
-  flex-direction: column;
-  justify-content: inherit;
-  align-items: inherit;
-  font-size: 0.85rem;
-  max-width: var(--max-width);
-  width: 100%;
-  z-index: 2;
-  font-family: var(--font-mono);
+  .aside {
+    display: flex;
+    gap: 15px;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 340px;
+
+    .input[type="text"],
+    .input[type="number"] {
+      text-indent: 7px;
+    }
+
+    .input[type="date"] {
+      text-indent: 3px;
+    }
+
+    .button {
+      padding: 10px;
+    }
+  }
+
+  .code {
+    width: 100%;
+    text-align: center;
+  }
 }
 
 .description a {
