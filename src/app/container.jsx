@@ -10,10 +10,10 @@ const MyComponent = dynamic(() => import("./component"), { ssr: false });
 
 export default function MyContainer() {
   return (
-    <WagmiProvider config={config}>
-      <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
+      <WagmiProvider config={config}>
         <MyComponent />
-      </QueryClientProvider>
-    </WagmiProvider>
+      </WagmiProvider>
+    </QueryClientProvider>
   );
 }
