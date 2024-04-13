@@ -6,22 +6,22 @@ settings:
 
 dependencies:
   '@requestnetwork/payment-detection':
-    specifier: ^0.42.0
-    version: 0.42.0
+    specifier: 0.41.0
+    version: 0.41.0
   '@requestnetwork/payment-processor':
-    specifier: ^0.44.0
-    version: 0.44.0(graphql@16.8.1)(typescript@5.4.5)
+    specifier: 0.43.0
+    version: 0.43.0(graphql@16.8.1)(typescript@5.4.5)
   '@requestnetwork/request-client.js':
-    specifier: ^0.45.0
+    specifier: 0.45.0
     version: 0.45.0
   '@requestnetwork/web3-signature':
-    specifier: ^0.5.0
-    version: 0.5.0
+    specifier: 0.4.41
+    version: 0.4.41
   '@tanstack/react-query':
     specifier: ^5.29.2
     version: 5.29.2(react@18.0.0)
   ethers:
-    specifier: ^5.7.2
+    specifier: 5.7.2
     version: 5.7.2
   next:
     specifier: 14.2.0
@@ -33,7 +33,7 @@ dependencies:
     specifier: ^18
     version: 18.0.0(react@18.0.0)
   viem:
-    specifier: 2.x
+    specifier: ~2.9.16
     version: 2.9.16(typescript@5.4.5)
   wagmi:
     specifier: ^2.5.19
@@ -3439,22 +3439,6 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@requestnetwork/currency@0.15.0:
-    resolution: {integrity: sha512-iuKFzSXCnxDCaXD1VxEh8h8jsQOUIoguX+Pt69IhWcGSKWSMv3Ay01Y75Mw8zraDHmVEzrGvyAFTlds+xBy1vw==}
-    engines: {node: '>=18.0.0'}
-    dependencies:
-      '@metamask/contract-metadata': 1.31.0
-      '@requestnetwork/types': 0.42.0
-      '@requestnetwork/utils': 0.42.0
-      multicoin-address-validator: 0.5.15
-      node-dijkstra: 2.5.0
-      tslib: 2.5.0
-    transitivePeerDependencies:
-      - bufferutil
-      - supports-color
-      - utf-8-validate
-    dev: false
-
   /@requestnetwork/data-access@0.32.0:
     resolution: {integrity: sha512-fqCYdcOpkw13D5kigy7Fgy2VmFNCThspFgNJlmsvb4m/S1ETuP5Q4OqErVRsLm37KoOWz2D4BCW0yrJiygL4UQ==}
     engines: {node: '>=18.0.0'}
@@ -3524,37 +3508,16 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@requestnetwork/payment-detection@0.42.0:
-    resolution: {integrity: sha512-YSFlHep2a14XeGoUi/oOlK5jAO8aaZuiT6YqhQtTteKoxbHkFtayRnKTh5+p5iL6g0tat5Z71ttIfyiIcCHRFg==}
-    engines: {node: '>=18.0.0'}
-    dependencies:
-      '@requestnetwork/currency': 0.15.0
-      '@requestnetwork/smart-contracts': 0.35.0
-      '@requestnetwork/types': 0.42.0
-      '@requestnetwork/utils': 0.42.0
-      ethers: 5.5.1
-      graphql: 16.8.1
-      graphql-request: 6.1.0(graphql@16.8.1)
-      graphql-tag: 2.12.6(graphql@16.8.1)
-      satoshi-bitcoin: 1.0.4
-      tslib: 2.5.0
-    transitivePeerDependencies:
-      - bufferutil
-      - encoding
-      - supports-color
-      - utf-8-validate
-    dev: false
-
-  /@requestnetwork/payment-processor@0.44.0(graphql@16.8.1)(typescript@5.4.5):
-    resolution: {integrity: sha512-7PN8yHkWDYON+RAScGRNP3JqdfCVIJJ1cFqcTnbxdu8HoDoeKieiONMMJkQ9okaZ+L3ThLTqfyaKIgDp9tbaPw==}
+  /@requestnetwork/payment-processor@0.43.0(graphql@16.8.1)(typescript@5.4.5):
+    resolution: {integrity: sha512-Ed4jccfb39zQeMVlVDh2OiF7WVbBkgqdvJLjTM2SCXmTgJ+kUjjjptq/FL/NmcN+sdv9r02YPnb5yCI9KM6s4Q==}
     engines: {node: '>=18.0.0'}
     dependencies:
       '@openzeppelin/contracts': 4.9.5
-      '@requestnetwork/currency': 0.15.0
-      '@requestnetwork/payment-detection': 0.42.0
-      '@requestnetwork/smart-contracts': 0.35.0
-      '@requestnetwork/types': 0.42.0
-      '@requestnetwork/utils': 0.42.0
+      '@requestnetwork/currency': 0.14.0
+      '@requestnetwork/payment-detection': 0.41.0
+      '@requestnetwork/smart-contracts': 0.34.0
+      '@requestnetwork/types': 0.41.0
+      '@requestnetwork/utils': 0.41.0
       '@superfluid-finance/sdk-core': 0.5.0(ethers@5.5.1)(graphql@16.8.1)(typescript@5.4.5)
       ethers: 5.5.1
       near-api-js: 2.1.4
@@ -3617,13 +3580,6 @@ packages:
       tslib: 2.5.0
     dev: false
 
-  /@requestnetwork/smart-contracts@0.35.0:
-    resolution: {integrity: sha512-RGqqaUMdqkNeBmXxaChg+868zi3bc0JFSwX5CnbxwCAmZSkk1nWKPuni/8Iz3oBj0ZP8ZMD8zzdUvUlt+H3M1Q==}
-    engines: {node: '>=18.0.0'}
-    dependencies:
-      tslib: 2.5.0
-    dev: false
-
   /@requestnetwork/transaction-manager@0.32.0:
     resolution: {integrity: sha512-6dsQlGWv0zGGbOfBYXgRXunUXDfB8T6PDqOhnu+b55Q66369vmqFi0UOFmjYKephwRkdo3sfsHhnPOGKAECziw==}
     engines: {node: '>=18.0.0'}
@@ -3647,16 +3603,6 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@requestnetwork/types@0.42.0:
-    resolution: {integrity: sha512-XFR63v9nFipPGLhaqOiir4RqAzYWMsBY/8y3UHNxYZVUAkIOxx1253POLSEQb9bdSI/1xMkTpFx0njOYqob91g==}
-    engines: {node: '>=18.0.0'}
-    dependencies:
-      ethers: 5.5.1
-    transitivePeerDependencies:
-      - bufferutil
-      - utf-8-validate
-    dev: false
-
   /@requestnetwork/utils@0.41.0:
     resolution: {integrity: sha512-YBo7TSPY+o2B3KA627S/5O7TTT0/caMCO0WmnzAz5CnHC3SeZycjPSoKk8kSOCXwMmZ7iLbyM0D5YOTNAIPbZQ==}
     engines: {node: '>=18.0.0'}
@@ -3671,26 +3617,12 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@requestnetwork/utils@0.42.0:
-    resolution: {integrity: sha512-WUeZwIhPgeq2JsJo6oLzUMQnDvVpkPQyhWTzG24Jcly8pB35LEVhKWojPZVpkwYnE4J4cyEcvwmtlaBh7zJfWQ==}
+  /@requestnetwork/web3-signature@0.4.41:
+    resolution: {integrity: sha512-7EoY4OxFRgdbV+qtHsMLN57N7znEvqzaU8GuAoP2oRvvcvpxf12S2Jr2rW8ubY1bfYgbjW1H5YoY8CXvDc34Rg==}
     engines: {node: '>=18.0.0'}
     dependencies:
-      '@requestnetwork/types': 0.42.0
-      '@toruslabs/eccrypto': 4.0.0
-      ethers: 5.5.1
-      secp256k1: 4.0.2
-      tslib: 2.5.0
-    transitivePeerDependencies:
-      - bufferutil
-      - utf-8-validate
-    dev: false
-
-  /@requestnetwork/web3-signature@0.5.0:
-    resolution: {integrity: sha512-iApvmrORB/1ELiGo9Umoj6LlpHtYGmv6i9GlRZmRJe511zo73TnkEPZT5q5XqNiWzIYgmE8lPEUYEK/y7EHHvg==}
-    engines: {node: '>=18.0.0'}
-    dependencies:
-      '@requestnetwork/types': 0.42.0
-      '@requestnetwork/utils': 0.42.0
+      '@requestnetwork/types': 0.41.0
+      '@requestnetwork/utils': 0.41.0
       ethers: 5.5.1
       tslib: 2.5.0
     transitivePeerDependencies:
@@ -3714,7 +3646,7 @@ packages:
     resolution: {integrity: sha512-XJbEPuaVc7b9n23MqlF6c+ToYIS3f7P2Sel8f3cSBQ9WORE4xrSuvhMpK9fDSFqJ7by/brc+rmJR/5HViRr0/w==}
     dependencies:
       '@safe-global/safe-gateway-typescript-sdk': 3.19.0
-      viem: 1.21.4(typescript@5.4.5)
+      viem: 1.20.0(typescript@5.4.5)
     transitivePeerDependencies:
       - bufferutil
       - typescript
@@ -5005,7 +4937,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001609
-      electron-to-chromium: 1.4.735
+      electron-to-chromium: 1.4.736
       node-releases: 2.0.14
       update-browserslist-db: 1.0.13(browserslist@4.23.0)
     dev: false
@@ -5482,7 +5414,7 @@ packages:
     resolution: {integrity: sha512-mf+TCx8wWc9VpuxfP2ht0iSISLZnt0JgWlrOKZiNqyUZWnjIaCIVNQArMHnCZKfEYRg6IM7A+NeJoN8gf/Ws0A==}
     dependencies:
       bn.js: 4.12.0
-      elliptic: 6.5.4
+      elliptic: 6.5.5
     dev: false
 
   /create-hash@1.2.0:
@@ -5780,8 +5712,8 @@ packages:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
     dev: false
 
-  /electron-to-chromium@1.4.735:
-    resolution: {integrity: sha512-pkYpvwg8VyOTQAeBqZ7jsmpCjko1Qc6We1ZtZCjRyYbT5v4AIUKDy5cQTRotQlSSZmMr8jqpEt6JtOj5k7lR7A==}
+  /electron-to-chromium@1.4.736:
+    resolution: {integrity: sha512-Rer6wc3ynLelKNM4lOCg7/zPQj8tPOCB2hzD32PX9wd3hgRRi9MxEbmkFCokzcEhRVMiOVLjnL9ig9cefJ+6+Q==}
     dev: false
 
   /elliptic@6.5.4:
@@ -7646,7 +7578,7 @@ packages:
         optional: true
     dependencies:
       typescript: 5.4.5
-      viem: 1.21.4(typescript@5.4.5)
+      viem: 1.20.0(typescript@5.4.5)
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -8961,7 +8893,7 @@ packages:
     engines: {node: '>=14.0.0'}
     requiresBuild: true
     dependencies:
-      elliptic: 6.5.4
+      elliptic: 6.5.5
       node-addon-api: 5.1.0
       node-gyp-build: 4.8.0
     dev: false
@@ -9836,8 +9768,8 @@ packages:
     engines: {node: '>= 0.8'}
     dev: false
 
-  /viem@1.21.4(typescript@5.4.5):
-    resolution: {integrity: sha512-BNVYdSaUjeS2zKQgPs+49e5JKocfo60Ib2yiXOWBT6LuVxY1I/6fFX3waEtpXvL1Xn4qu+BVitVtMh9lyThyhQ==}
+  /viem@1.20.0(typescript@5.4.5):
+    resolution: {integrity: sha512-yPjV9pJr10xi28C/9LEvs5zdZNEMiru3Kz7nufghVYABJAfeSkoZQXb6b23n7MscS7c55JO5nmUI3xKkd9g6Yg==}
     peerDependencies:
       typescript: '>=5.0.4'
     peerDependenciesMeta:
