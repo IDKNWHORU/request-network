@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@rainbow-me/rainbowkit": "^2.0.5",
     "@requestnetwork/payment-detection": "0.41.0",
     "@requestnetwork/payment-processor": "0.43.0",
     "@requestnetwork/request-client.js": "0.45.0",

@@ -7,6 +7,7 @@ import {
   hasSufficientFunds,
   payRequest,
 } from "@requestnetwork/payment-processor";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 import {
   RequestNetwork,
   Types,
@@ -112,7 +113,7 @@ export default function MyComponent() {
     if (formData.get("payer-identity").length > 0) {
       _requestCreateParameters.payer = {
         type: Types.Identity.TYPE.ETHEREUM_ADDRESS,
-        value: payerIdentity,
+        value: formData.get("payer-identity"),
       };
     }
 
@@ -231,6 +232,8 @@ export default function MyComponent() {
       </aside>
       <form className={styles.form} action={createRequest}>
         <h3>Request Form</h3>
+        <label htmlFor="payee-identity">Payee Identity</label>
+        <ConnectButton />
         <label htmlFor="amount">Amount*</label>
         <input
           className={styles.input}
