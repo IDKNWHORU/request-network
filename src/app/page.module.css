@@ -222,6 +222,17 @@
   }
 }
 
+.alert {
+  background: #fff;
+  color: #999;
+  border: none;
+  font-size: 1.17em;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: "__Inter_aaf875", "__Inter_Fallback_aaf875";
+  font-style: normal;
+}
+
 /* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
   .grid {
