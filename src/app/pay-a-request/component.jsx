@@ -15,39 +15,36 @@ import { useState } from "react";
 import { useAccount } from "wagmi";
 import styles from "./page.module.css";
 import { useEthersV5Signer } from "@/hooks/use-ethers-v5-signer";
-
-const APP_STATUS = {
-  WAITING_INPUT: 0,
-  PERSISTING_TO_IPFS: 1,
-  PERSISTING_ON_CHAIN: 2,
-  REQUEST_CONFIRMED: 3,
-  APPROVING: 4,
-  APPROVED: 5,
-  ERROR_OCCURRED: -1,
-};
-
-const APP_STAUTS_ARR = [
-  "waiting input",
-  "persisting to ipfs",
-  "persisting on chain",
-  "request confirmed",
-  "approving",
-  "approved",
-  "error occurred",
-];
+import { APP_STATUS, APP_STAUTS_ARR } from "@/enums/status";
 
 export default function PayARequestComponent({ requestId }) {
   const provider = useEthersV5Provider();
   const signer = useEthersV5Signer();
-  const [approveLog, setApproveLog] = useState([]);
+  const [appLog, setAppLog] = useState([]);
   const { address, isConnecting, isDisconnected } = useAccount();
-  const [approveStatus, setApproveStatus] = useState(
-    APP_STATUS.REQUEST_CONFIRMED
-  );
+  const [status, setStatus] = useState(APP_STATUS.REQUEST_CONFIRMED);
   const [requestData, setRequestData] = useState({});
 
+  const canApprove = () => {
+    return (
+      address != null &&
+      !isConnecting &&
+      !isDisconnected &&
+      [APP_STATUS.REQUEST_CONFIRMED, APP_STATUS.ERROR_OCCURRED].includes(status)
+    );
+  };
+
+  const canPay = () => {
+    return (
+      address != null &&
+      !isConnecting &&
+      !isDisconnected &&
+      APP_STATUS.APPROVED === status
+    );
+  };
+
   const approve = async () => {
-    setApproveStatus(APP_STATUS.APPROVING);
+    setStatus(APP_STATUS.APPROVING);
     const requestClient = new RequestNetwork({
       nodeConnectionConfig: {
         baseURL: "https://sepolia.gateway.request.network/",
@@ -68,10 +65,10 @@ export default function PayARequestComponent({ requestId }) {
 
       log.push(`_hasSufficientFunds = ${_hasSufficientFunds}`);
 
-      setApproveLog([...approveLog, , ...log]);
+      setAppLog([...appLog, , ...log]);
 
       if (!_hasSufficientFunds) {
-        setApproveStatus(APP_STATUS.REQUEST_CONFIRMED);
+        setStatus(APP_STATUS.REQUEST_CONFIRMED);
         return;
       }
 
@@ -80,7 +77,7 @@ export default function PayARequestComponent({ requestId }) {
         Types.Extension.PAYMENT_NETWORK_ID.ERC20_FEE_PROXY_CONTRACT
       ) {
         log.push(`ERC20 Request detected. Checking approval...`);
-        setApproveLog([...approveLog, ...log]);
+        setAppLog([...appLog, ...log]);
         const _hasErc20Approval = await hasErc20Approval(
           requestData,
           address,
@@ -88,15 +85,15 @@ export default function PayARequestComponent({ requestId }) {
         );
 
         log.push(`_hasErc20Approval = ${_hasErc20Approval}`);
-        setApproveLog([...approveLog, ...log]);
+        setAppLog([...appLog, ...log]);
         if (!_hasErc20Approval) {
           const approvalTx = await approveErc20(requestData, signer);
           await approvalTx.wait(2);
         }
       }
-      setApproveStatus(APP_STATUS.APPROVED);
+      setStatus(APP_STATUS.APPROVED);
     } catch (error) {
-      setApproveStatus(APP_STATUS.ERROR_OCCURRED);
+      setStatus(APP_STATUS.ERROR_OCCURRED);
       alert(error);
     }
   };
@@ -115,12 +112,20 @@ export default function PayARequestComponent({ requestId }) {
       const paymentTx = await payRequest(requestData, signer);
       await paymentTx.wait(2);
 
+      const log = [];
       while (requestData.balance?.balance < requestData.expectedAmount) {
+        log.push(`balance = ${requestData.balance?.balance}`);
+        setAppLog([...appLog, ...log]);
         requestData = await request.refresh();
         await new Promise((resolve) => setTimeout(resolve, 1000));
       }
+
+      log.push("payment detected!");
+      setAppLog([...appLog, ...log]);
       setRequestData(requestData);
+      setStatus(APP_STATUS.REQUEST_PAID);
     } catch (error) {
+      setStatus(APP_STATUS.ERROR_OCCURRED);
       console.error(error);
       alert(error);
     }
@@ -137,24 +142,42 @@ export default function PayARequestComponent({ requestId }) {
         <label htmlFor="payee-identity">Payee Identity</label>
         <ConnectButton />
       </div>
-      <h2 className={styles.status}>
-        App Status: {APP_STAUTS_ARR.at(approveStatus)}
-      </h2>
+      <h3 className={styles.status}>App Status: {APP_STAUTS_ARR.at(status)}</h3>
+      <h4 className={styles.link}>
+        <Link
+          href="https://sepolia.etherscan.io/address/0x370DE27fdb7D1Ff1e1BaA7D11c5820a324Cf623C#writeContract#F4"
+          target="_blank"
+        >
+          Mint FAU Token
+        </Link>
+      </h4>
       <div className={styles.flex}>
-        <div>
-          <button type="button" onClick={approve}>
+        <div className={styles.approve}>
+          <button
+            className={styles.button}
+            type="button"
+            onClick={approve}
+            disabled={!canApprove()}
+          >
             Approve
           </button>
-          <h3>approve log</h3>
-          {approveLog.map((log) => (
-            <p key={crypto.randomUUID()}>{log}</p>
-          ))}
+          <h4>approve log</h4>
+          <article className={styles.log}>
+            {appLog.map((log) => (
+              <p key={crypto.randomUUID()}>{log}</p>
+            ))}
+          </article>
         </div>
-        <div>
-          <button type="button" onClick={payARequest}>
+        <div className={styles["pay-a-request"]}>
+          <button
+            className={styles.button}
+            type="button"
+            onClick={payARequest}
+            disabled={!canPay()}
+          >
             Pay a request
           </button>
-          <p>{JSON.stringify(requestData)}</p>
+          <code className={styles.code}>{JSON.stringify(requestData)}</code>
         </div>
       </div>
     </main>

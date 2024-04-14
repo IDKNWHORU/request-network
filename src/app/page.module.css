@@ -32,8 +32,12 @@
   }
 
   .code {
-    width: 100%;
-    text-align: center;
+    width: 500px;
+    text-align: left;
+    overflow: auto;
+    background: #eee;
+    min-height: 20px;
+    text-indent: 15px;
   }
 }
 

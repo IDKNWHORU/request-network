@@ -12,22 +12,7 @@ import { useState } from "react";
 import { parseUnits, zeroAddress } from "viem";
 import { useAccount, useWalletClient } from "wagmi";
 import styles from "./page.module.css";
-
-const APP_STATUS = {
-  WAITING_INPUT: 0,
-  PERSISTING_TO_IPFS: 1,
-  PERSISTING_ON_CHAIN: 2,
-  REQUEST_CONFIRMED: 3,
-  ERROR_OCCURRED: -1,
-};
-
-const APP_STAUTS_ARR = [
-  "waiting input",
-  "persisting to ipfs",
-  "persisting on chain",
-  "request confirmed",
-  "error occurred",
-];
+import { APP_STATUS, APP_STAUTS_ARR } from "../enums/status";
 
 export default function MyComponent() {
   const { data: walletClient } = useWalletClient();
@@ -138,7 +123,7 @@ export default function MyComponent() {
   return (
     <main className={styles.main}>
       <aside className={styles.aside}>
-        {requestData.requestId !== undefined ? (
+        {status === APP_STATUS.REQUEST_CONFIRMED ? (
           <h3>
             <Link href={`/pay-a-request?requestId=${requestData.requestId}`}>
               Pay a request
@@ -192,7 +177,15 @@ export default function MyComponent() {
         </button>
       </form>
       <h4>STATUS: {APP_STAUTS_ARR.at(status)}</h4>
-      <p className={styles.code}>{JSON.stringify(requestData ?? {})}</p>
+      <h4>
+        <Link
+          href="https://sepolia.etherscan.io/address/0x370DE27fdb7D1Ff1e1BaA7D11c5820a324Cf623C#writeContract#F4"
+          target="_blank"
+        >
+          Mint FAU Token
+        </Link>
+      </h4>
+      <code className={styles.code}>{JSON.stringify(requestData ?? {})}</code>
     </main>
   );
 }
