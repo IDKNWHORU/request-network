@@ -12,7 +12,7 @@ export default function Search() {
 
   return (
     <form className={styles.form} action={handleSearchUser}>
-      <label htmlFor="user">users</label>
+      <label htmlFor="user">address :</label>
       <input type="text" name="user" id="user" />
       <button type="submit">find</button>
     </form>

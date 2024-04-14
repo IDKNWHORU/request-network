@@ -3,6 +3,7 @@
   flex-direction: column;
   gap: 20px;
   align-items: center;
+  padding: 45px 0;
 }
 
 .table > thead > tr > th {
