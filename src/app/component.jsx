@@ -134,6 +134,19 @@ export default function MyComponent() {
             Pay a request
           </button>
         )}
+        <h3>
+          <Link href="/retrieve-a-users-requests">
+            Retrieve a user's requests
+          </Link>
+        </h3>
+        <h3>
+          <Link
+            href="https://sepolia.etherscan.io/address/0x370DE27fdb7D1Ff1e1BaA7D11c5820a324Cf623C#writeContract#F4"
+            target="_blank"
+          >
+            Mint FAU Token
+          </Link>
+        </h3>
       </aside>
       <form className={styles.form} action={createRequest}>
         <label htmlFor="payee-identity">Payee Identity</label>
@@ -177,14 +190,6 @@ export default function MyComponent() {
         </button>
       </form>
       <h4>STATUS: {APP_STAUTS_ARR.at(status)}</h4>
-      <h4>
-        <Link
-          href="https://sepolia.etherscan.io/address/0x370DE27fdb7D1Ff1e1BaA7D11c5820a324Cf623C#writeContract#F4"
-          target="_blank"
-        >
-          Mint FAU Token
-        </Link>
-      </h4>
       <code className={styles.code}>{JSON.stringify(requestData ?? {})}</code>
     </main>
   );

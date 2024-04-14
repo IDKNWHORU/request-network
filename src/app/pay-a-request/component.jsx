@@ -137,20 +137,25 @@ export default function PayARequestComponent({ requestId }) {
         <h3>
           <Link href="/">Create a request</Link>
         </h3>
+        <h3>
+          <Link href="/retrieve-a-users-requests">
+            Retrieve a user's requests
+          </Link>
+        </h3>
+        <h3 className={styles.link}>
+          <Link
+            href="https://sepolia.etherscan.io/address/0x370DE27fdb7D1Ff1e1BaA7D11c5820a324Cf623C#writeContract#F4"
+            target="_blank"
+          >
+            Mint FAU Token
+          </Link>
+        </h3>
       </aside>
       <div className={styles.wallet}>
         <label htmlFor="payee-identity">Payee Identity</label>
         <ConnectButton />
       </div>
       <h3 className={styles.status}>App Status: {APP_STAUTS_ARR.at(status)}</h3>
-      <h4 className={styles.link}>
-        <Link
-          href="https://sepolia.etherscan.io/address/0x370DE27fdb7D1Ff1e1BaA7D11c5820a324Cf623C#writeContract#F4"
-          target="_blank"
-        >
-          Mint FAU Token
-        </Link>
-      </h4>
       <div className={styles.flex}>
         <div className={styles.approve}>
           <button

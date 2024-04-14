@@ -6,7 +6,10 @@
 }
 
 .gnb {
-  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 15px;
   margin: 15px 0;
 }
 
@@ -19,8 +22,7 @@
   gap: 10px;
 }
 
-.status,
-.link {
+.status {
   text-align: center;
   margin: 40px 0;
 }
