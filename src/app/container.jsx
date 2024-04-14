@@ -3,19 +3,15 @@
 import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { WagmiProvider } from "wagmi";
-import { config } from "./config";
-import dynamic from "next/dynamic";
+import { config } from "../config/rainbow-kit";
 
 const queryClient = new QueryClient();
-const MyComponent = dynamic(() => import("./component"), { ssr: false });
 
-export default function MyContainer() {
+export default function MyContainer({ children }) {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider>
-          <MyComponent />
-        </RainbowKitProvider>
+        <RainbowKitProvider>{children}</RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>
   );

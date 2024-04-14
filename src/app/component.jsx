@@ -1,12 +1,14 @@
 "use client";
 
-import { getPaymentNetworkExtension } from "@requestnetwork/payment-detection";
-import {
-  approveErc20,
-  hasErc20Approval,
-  hasSufficientFunds,
-  payRequest,
-} from "@requestnetwork/payment-processor";
+// import { getPaymentNetworkExtension } from "@requestnetwork/payment-detection";
+// import {
+//   approveErc20,
+//   hasErc20Approval,
+//   hasSufficientFunds,
+//   payRequest,
+// } from "@requestnetwork/payment-processor";
+// import { useEthersV5Provider } from "./use-ethers-v5-provider";
+// import { useEthersV5Signer } from "./use-ethers-v5-signer";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import {
   RequestNetwork,
@@ -14,13 +16,11 @@ import {
   Utils,
 } from "@requestnetwork/request-client.js";
 import { Web3SignatureProvider } from "@requestnetwork/web3-signature";
+import Link from "next/link";
 import { useState } from "react";
+import { parseUnits, zeroAddress } from "viem";
 import { useAccount, useWalletClient } from "wagmi";
 import styles from "./page.module.css";
-import { useEthersV5Provider } from "./use-ethers-v5-provider";
-import { useEthersV5Signer } from "./use-ethers-v5-signer";
-import Link from "next/link";
-import { parseUnits, zeroAddress } from "viem";
 
 const APP_STATUS = {
   WAITING_INPUT: 0,
@@ -40,12 +40,12 @@ const APP_STAUTS_ARR = [
 
 export default function MyComponent() {
   const { data: walletClient } = useWalletClient();
-  const { address } = useAccount();
+  const { address, isConnecting, isDisconnected } = useAccount();
   const [requestData, setRequestData] = useState({});
-  const [payARequestData, setPayARequestData] = useState({});
+  // const [payARequestData, setPayARequestData] = useState({});
   const [status, setStatus] = useState(APP_STATUS.WAITING_INPUT);
-  const provider = useEthersV5Provider();
-  const signer = useEthersV5Signer();
+  // const provider = useEthersV5Provider();
+  // const signer = useEthersV5Signer();
 
   const requestParameters = ({
     amount,
@@ -132,6 +132,19 @@ export default function MyComponent() {
       setStatus(APP_STATUS.ERROR_OCCURRED);
       alert(error);
     }
+  };
+
+  const canSubmit = () => {
+    return (
+      address != null &&
+      !isConnecting &&
+      !isDisconnected &&
+      [
+        APP_STATUS.WAITING_INPUT,
+        APP_STATUS.REQUEST_CONFIRMED,
+        APP_STATUS.ERROR_OCCURRED,
+      ].includes(status)
+    );
   };
 
   // const payARequest = async () => {
@@ -224,16 +237,16 @@ export default function MyComponent() {
         </h3>
         {requestData.requestId !== undefined ? (
           <h3>
-            <Link href={`/pay-a-request/${requestData.requestId}`}>
+            <Link href={`/pay-a-request?requestId=${requestData.requestId}`}>
               Pay a request
             </Link>
           </h3>
         ) : null}
       </aside>
       <form className={styles.form} action={createRequest}>
-        <h3>Request Form</h3>
         <label htmlFor="payee-identity">Payee Identity</label>
         <ConnectButton />
+        <h3>Request Form</h3>
         <label htmlFor="amount">Amount*</label>
         <input
           className={styles.input}
@@ -267,11 +280,11 @@ export default function MyComponent() {
         />
         <label htmlFor="reason">Reason</label>
         <input className={styles.input} type="text" name="reason" id="reason" />
-        <button className={styles.button} type="submit">
+        <button className={styles.button} type="submit" disabled={!canSubmit()}>
           Create a request
         </button>
       </form>
-      <h4>STATUS: {APP_STAUTS_ARR[status]}</h4>
+      <h4>STATUS: {APP_STAUTS_ARR.at(status)}</h4>
       <p className={styles.code}>{JSON.stringify(requestData ?? {})}</p>
     </main>
   );
